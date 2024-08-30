@@ -4,8 +4,25 @@ import { questions } from './questions.js';
 
 const generateQuestion = () => {
     const { question, answer } = pickRandomElement(questions)();
+    
+    const children = [];
+    for(const { type, value } of question){
+        if(type === `text`){
+            const p = document.createElement(`p`);
+            p.innerText = value;
+            children.push(p);
+        }
+        else if(type === `maths`){
+            const p = document.createElement(`p`);
+            katex.render(value, p);
+            children.push(p);
+        }
+    }
+
+    document.getElementById('question').replaceChildren(...children);
+
     document.getElementById('result').style.display = `none`;
-    katex.render(question, document.getElementById('question'));
+    
     katex.render(String(answer), document.getElementById('result'));
 }
 
