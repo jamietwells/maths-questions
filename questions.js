@@ -55,15 +55,15 @@ export const questions = [
         let factor = randomNumber(2, 20);
         const num1 = randomNumber(1, 5) * factor;
         const num2 = randomNumber(3, 8) * factor;
-        
+
 
         let answer = Math.min(num1, num2);
         let larger = Math.max(num1, num2);
         factor = 1;
 
         while (true) {
-            if(answer % factor === 0){
-                if(larger % (answer / factor) === 0)
+            if (answer % factor === 0) {
+                if (larger % (answer / factor) === 0)
                     break;
             }
             factor++;
@@ -75,5 +75,19 @@ export const questions = [
             ],
             answer: (answer / factor)
         }
+    },
+    () => {
+        const number = randomNumber(100, 999)
+        const formatted_number = number / 100
+        const power = randomNumber(2, 9)
+
+        return {
+            question: [
+                { value: `Convert the following number to standard form:`, type: `text` },
+                { value: `${formatted_number * (10 ** power)}`, type: `maths` }
+            ],
+            answer: `${formatted_number} \\times 10^{${power}}`
+        }
     }
+
 ]
