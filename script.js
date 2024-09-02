@@ -4,14 +4,20 @@ import { questions } from './questions.js';
 
 const renderSection = (data, section) => {
     const children = [];
-    for (const { type, value } of data) {
+    for (const { type, value, colour } of data) {
         if (type === `text`) {
             const p = document.createElement(`p`);
+            if(colour)
+                p.style.color = colour;
+
             p.innerText = value;
             children.push(p);
         }
         else if (type === `maths`) {
             const p = document.createElement(`p`);
+            if(colour)
+                p.style.color = colour;
+            
             katex.render(value, p);
             children.push(p);
         }

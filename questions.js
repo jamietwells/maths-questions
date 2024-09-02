@@ -37,18 +37,39 @@ export const questions = [
     () => {
         const num1 = randomNumber(4, 25);
         const num2 = randomNumber(3, 16);
-        let answer = num1;
-        while (true) {
-            if (answer % num2 === 0)
-                break;
-            answer += num1;
+
+        const smallest = Math.min(num1, num2);
+        const biggest = Math.max(num1, num2);
+
+        const getMultiples = (current, other, soFar) => {
+            const { number, result, step } = current;
+            const next = { number, result: result + number, step: step + 1 };
+            
+            if(soFar.some(s => s.result == next.result))
+                return [...soFar, next]
+            
+            if(next.result > other.result){
+                return getMultiples(other, next, [...soFar, next]);
+            }
+            else {
+                return getMultiples(next, other, [...soFar, next]);
+            }
         }
+
+        const start = [{ number: smallest, result: smallest, step: 1 }, { number: biggest, result: biggest, step: 1 }];
+
+        const steps = getMultiples(start[0], start[1], start);
+
         return {
             question: [
                 { value: `Find the lowest common multiple of:`, type: `text` },
                 { value: `${num1} \\text{, } ${num2}`, type: `maths` }
             ],
-            answer: [{ value: `${answer}`, type: `maths` }]
+            answer: [
+                { value: `The lowest common multiple is: ${steps[steps.length-1].result} because:`, type: `text` },
+                ...steps.map(({number, result, step}) => ({ value: `${number} \\times ${step} = ${result}`, type: `maths`, colour: number === num1 ? 'blue' : 'green' })),
+                { value: `So ${steps[steps.length-1].result} is in both times tables`, type: `text` },
+            ]
         }
     },
     () => {
