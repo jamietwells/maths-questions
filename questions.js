@@ -55,11 +55,11 @@ export const questions = [
         let factor = randomNumber(2, 20);
         const num1 = randomNumber(1, 5) * factor;
         const num2 = randomNumber(3, 8) * factor;
-
+    
         let answer = Math.min(num1, num2);
         let larger = Math.max(num1, num2);
         factor = 1;
-
+    
         while (true) {
             if (answer % factor === 0) {
                 if (larger % (answer / factor) === 0)
@@ -67,12 +67,32 @@ export const questions = [
             }
             factor++;
         }
+    
+        const hcf = answer / factor;
+    
+        const getFactorExplanation = (num) => {
+            return [...Array(num + 1).keys()]
+                .filter(i => i !== 0 && num % i === 0)
+                .map(factor => 
+                    `${factor} \\text{ because } ${factor} \\times ${num / factor} = ${num}`
+                )
+                .join(" \\newline ");
+        };
+    
         return {
             question: [
                 { value: `Find the highest common factor of:`, type: `text` },
                 { value: `${num1} \\text{, } ${num2}`, type: `maths` }
             ],
-            answer: [{ value: `${answer / factor}`, type: `maths` }]
+            answer: [
+                { value: `The highest common factor is:`, type: `text` },
+                { value: `${hcf}`, type: `maths` },
+                { value: `Factors of ${num1}:`, type: `text` },
+                { value: getFactorExplanation(num1), type: `maths` },
+                { value: `Factors of ${num2}:`, type: `text` },
+                { value: getFactorExplanation(num2), type: `maths` },
+                { value: `The highest common factor is the largest factor common to both lists.`, type: `text` }
+            ]
         }
     },
     () => {
