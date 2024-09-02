@@ -87,5 +87,18 @@ export const questions = [
             ],
             answer: [{ value: `${formatted_number} \\times 10^{${power}}`, type: `maths` }]
         }
-    }  
+    },
+    () => {
+        const formatted_number = (randomNumber(1, 9) + randomNumber(0, 99) / 100).toFixed(2);
+        const power = randomNumber(2, 9);
+        const number = formatted_number * (10 ** power);
+    
+        return {
+            question: [
+                { value: `Convert the following number from standard form:`, type: `text` },
+                { value: `${formatted_number} \\times 10^{${power}}`, type: `maths` }
+            ],
+            answer: [{ value: `${number}`, type: `maths` }]
+        }
+    }
 ]
