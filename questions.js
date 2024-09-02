@@ -6,7 +6,7 @@ export const questions = [
         const num2 = randomNumber();
         return {
             question: [{ value: `${num1} + ${num2}`, type: `maths` }],
-            answer: num1 + num2
+            answer: [{ value: `${num1 + num2}`, type: `maths` }]
         }
     },
     () => {
@@ -14,7 +14,7 @@ export const questions = [
         const num2 = randomNumber();
         return {
             question: [{ value: `${num1} - ${num2}`, type: `maths` }],
-            answer: num1 - num2
+            answer: [{ value: `${num1 - num2}`, type: `maths` }]
         }
     },
     () => {
@@ -23,7 +23,7 @@ export const questions = [
         const num2 = num1 * answer;
         return {
             question: [{ value: `${num2} \\div ${num1}`, type: `maths` }],
-            answer
+            answer: [{ value: `${answer}`, type: `maths` }]
         }
     },
     () => {
@@ -31,7 +31,7 @@ export const questions = [
         const num2 = randomNumber(1, 12);
         return {
             question: [{ value: `${num1} \\times ${num2}`, type: `maths` }],
-            answer: num1 * num2
+            answer: [{ value: `${num1 * num2}`, type: `maths` }]
         }
     },
     () => {
@@ -48,14 +48,13 @@ export const questions = [
                 { value: `Find the lowest common multiple of:`, type: `text` },
                 { value: `${num1} \\text{, } ${num2}`, type: `maths` }
             ],
-            answer: answer
+            answer: [{ value: `${answer}`, type: `maths` }]
         }
     },
     () => {
         let factor = randomNumber(2, 20);
         const num1 = randomNumber(1, 5) * factor;
         const num2 = randomNumber(3, 8) * factor;
-
 
         let answer = Math.min(num1, num2);
         let larger = Math.max(num1, num2);
@@ -73,7 +72,7 @@ export const questions = [
                 { value: `Find the highest common factor of:`, type: `text` },
                 { value: `${num1} \\text{, } ${num2}`, type: `maths` }
             ],
-            answer: (answer / factor)
+            answer: [{ value: `${answer / factor}`, type: `maths` }]
         }
     },
     () => {
@@ -86,8 +85,7 @@ export const questions = [
                 { value: `Convert the following number to standard form:`, type: `text` },
                 { value: `${formatted_number * (10 ** power)}`, type: `maths` }
             ],
-            answer: `${formatted_number} \\times 10^{${power}}`
+            answer: [{ value: `${formatted_number} \\times 10^{${power}}`, type: `maths` }]
         }
-    }
-
+    }  
 ]
